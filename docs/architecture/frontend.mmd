@@ -1,0 +1,14 @@
+flowchart LR
+    U[User] --> UI[Next.js Dashboard]
+    UI --> WF[Workflows Page]
+    UI --> RN[Runs Page]
+    UI --> AR[Artifacts Page]
+    UI --> FL[Files Page]
+
+    WF --> FP[File Picker from inputs/]
+    RN --> RV[Review Gate Actions]
+    AR --> AV[Artifact View/Download]
+    FL --> FU[Upload/List/Preview]
+
+    UI --> API[(Next.js API)]
+    API --> POLL[Run Status Polling]

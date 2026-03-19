@@ -1,0 +1,34 @@
+flowchart TB
+    subgraph Client
+      WEB[Next.js Frontend]
+      FST[Filestash UI]
+    end
+
+    subgraph Backend
+      API[Next.js API + Workflow Engine]
+      SAFE[Workspace Path Guard]
+    end
+
+    subgraph Services
+      OC[OpenClaw Container]
+      SB[(Supabase Postgres)]
+    end
+
+    subgraph SharedVolume["Shared Bind Mount: WORKSPACES_ROOT"]
+      INP[workspaces/<id>/inputs]
+      OUT[workspaces/<id>/runs/<runId>/outputs]
+      LOG[workspaces/<id>/runs/<runId>/logs]
+    end
+
+    WEB --> API
+    FST --> INP
+    API --> SAFE
+    SAFE --> INP
+    SAFE --> OUT
+    SAFE --> LOG
+
+    API --> SB
+    API --> OC
+    OC --> INP
+    API --> OUT
+    API --> LOG
